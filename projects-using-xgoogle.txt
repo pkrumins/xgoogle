@@ -1,0 +1,13 @@
+Here is a list of projects that other people have done, that use my library:
+
+* fimap  --  http://code.google.com/p/fimap/
+
+  fimap is a little python tool which can find, prepare, audit, exploit and
+  even google automaticly for local and remote file inclusion bugs in webapps.
+
+* translate.org.za  --  http://www.translate.org.za/
+  
+  Translate.org.za is focused on the localisation, or translation, of Open
+  Source software into South Africa's 11 official languages and localisations
+  of GNOME, KDE, OpenOffice.org, Firefox and Thunderbird.
+
