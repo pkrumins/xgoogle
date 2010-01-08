@@ -10,7 +10,9 @@
 
 from browser import Browser, BrowserError
 from urllib import quote_plus
-import simplejson as json
+
+try:    import json
+except: import simplejson as json
 
 
 class TranslationError(Exception):
@@ -89,17 +91,17 @@ class LanguageDetector(object):
             data = json.loads(detection)
 
             if data['responseStatus'] != 200:
-                raise DetectError, "Failed detecting language: %s" % data['responseDetails']
+                raise DetectionError, "Failed detecting language: %s" % data['responseDetails']
 
             rd = data['responseData']
             return Language(rd['language'], rd['confidence'], rd['isReliable'])
 
         except BrowserError, e:
-            raise DetectError, "Failed detecting language (getting %s failed): %s" % (e.url, e.error)
+            raise DetectionError, "Failed detecting language (getting %s failed): %s" % (e.url, e.error)
         except ValueError, e:
-            raise DetectErrro, "Failed detecting language (json failed): %s" % e.message
+            raise DetectionErrro, "Failed detecting language (json failed): %s" % e.message
         except KeyError, e:
-            raise DetectError, "Failed detecting language, response didn't contain the necessary data"
+            raise DetectionError, "Failed detecting language, response didn't contain the necessary data"
 
         return None
 
@@ -197,3 +199,4 @@ _languages = {
   'cy': 'Welsh',
   'yi': 'Yiddish'
 };
+
