@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# encoding: utf-8
 #
 # Peteris Krumins (peter@catonmat.net)
 # http://www.catonmat.net  --  good coders code, great reuse
@@ -49,12 +50,12 @@ class SearchResult:
         return 'Google Search Result: "%s"' % self.title
 
 class GoogleSearch(object):
-    SEARCH_URL_0 = "http://www.google.com/search?hl=en&q=%(query)s&btnG=Google+Search"
-    NEXT_PAGE_0 = "http://www.google.com/search?hl=en&q=%(query)s&start=%(start)d"
-    SEARCH_URL_1 = "http://www.google.com/search?hl=en&q=%(query)s&num=%(num)d&btnG=Google+Search"
-    NEXT_PAGE_1 = "http://www.google.com/search?hl=en&q=%(query)s&num=%(num)d&start=%(start)d"
+    SEARCH_URL_0 = "http://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&btnG=Google+Search"
+    NEXT_PAGE_0 = "http://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&start=%(start)d"
+    SEARCH_URL_1 = "http://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&num=%(num)d&btnG=Google+Search"
+    NEXT_PAGE_1 = "http://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&num=%(num)d&start=%(start)d"
 
-    def __init__(self, query, random_agent=False, debug=False):
+    def __init__(self, query, random_agent=False, debug=False, lang="en", tld="com", re_search_strings=None):
         self.query = query
         self.debug = debug
         self.browser = Browser(debug=debug)
@@ -63,6 +64,16 @@ class GoogleSearch(object):
         self._page = 0
         self._results_per_page = 10
         self._last_from = 0
+        self._lang = lang
+        self._tld = tld
+        
+        if re_search_strings:
+            self._re_search_strings = re_search_strings
+        elif lang == "de":
+            self._re_search_strings = ("Ergebnisse", "von", u"ungefähr")
+        # add more localised versions here
+        else:
+            self._re_search_strings = ("Results", "of", "about")
 
         if random_agent:
             self.browser.set_random_user_agent()
@@ -135,7 +146,9 @@ class GoogleSearch(object):
 
         safe_url = url % { 'query': urllib.quote_plus(self.query),
                            'start': self._page * self._results_per_page,
-                           'num': self._results_per_page }
+                           'num': self._results_per_page,
+                           'tld' : self._tld,
+                           'lang' : self._lang }
 
         try:
             page = self.browser.get_page(safe_url)
@@ -156,7 +169,7 @@ class GoogleSearch(object):
             return empty_info
         txt = ''.join(p.findAll(text=True))
         txt = txt.replace(',', '')
-        matches = re.search(r'Results (\d+) - (\d+) of (?:about )?(\d+)', txt, re.U)
+        matches = re.search(r'%s (\d+) - (\d+) %s (?:%s )?(\d+)' % self._re_search_strings, txt, re.U)
         if not matches:
             return empty_info
         return {'from': int(matches.group(1)), 'to': int(matches.group(2)), 'total': int(matches.group(3))}

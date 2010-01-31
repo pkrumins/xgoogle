@@ -1,0 +1,8 @@
+This file contains people who have helped xgoogle project:
+
+    * Holger Berndt
+      Thanks for adding 'lang' and 'tld' arguments to Google Search
+
+
+PS. If I missed you, please email me at peter@catonmat.net, and I'll add you here!
+
