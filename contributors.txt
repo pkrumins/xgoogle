@@ -7,6 +7,9 @@ This file contains people who have helped xgoogle project:
        * 'last_search_url' property
        * 'date indexed' search
 
+    * Juanjo Conti
+      Thanks for adding Google Blog Search class
+
 
 PS. If I missed you, please email me at peter@catonmat.net, and I'll add you here!
 
