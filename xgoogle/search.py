@@ -74,6 +74,8 @@ class GoogleSearch(object):
             self._re_search_strings = re_search_strings
         elif lang == "de":
             self._re_search_strings = ("Ergebnisse", "von", u"ungefähr")
+        elif lang == "es":
+            self._re_search_strings = ("Resultados", "de", "aproximadamente")
         # add more localised versions here
         else:
             self._re_search_strings = ("Results", "of", "about")
