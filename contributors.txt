@@ -10,6 +10,9 @@ This file contains people who have helped xgoogle project:
     * Juanjo Conti
       Thanks for adding Google Blog Search class
 
+    * Steve Steiner
+      Thanks for adding setup.py
+
 
 PS. If I missed you, please email me at peter@catonmat.net, and I'll add you here!
 
