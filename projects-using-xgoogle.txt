@@ -11,3 +11,11 @@ Here is a list of projects that other people have done, that use my library:
   Source software into South Africa's 11 official languages and localisations
   of GNOME, KDE, OpenOffice.org, Firefox and Thunderbird.
 
+* Top40  --  http://github.com/staticd/Top40
+
+  This program grabs the top 40 artists played on Alt Nation (a Sirius XM
+  radio channel) over the past week and runs a Google search on each artist in
+  an attempt to find links to free music from the artist being searched.
+  Thanks to xgoogle, I have an interface with Google to make this program
+  successful.
+
