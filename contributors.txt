@@ -13,6 +13,9 @@ This file contains people who have helped xgoogle project:
     * Steve Steiner
       Thanks for adding setup.py
 
+    * azappella
+      Thanks for fixing search.py after redesign
+
 
 PS. If I missed you, please email me at peter@catonmat.net, and I'll add you here!
 
